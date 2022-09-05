@@ -257,6 +257,12 @@ button.primary,
   border: 1px solid var(--custom-color-brand);
 }
 
+button.secondary,
+.button.secondary {
+  background-color: var(--custom-color-brand);
+  border: 1px solid var(--custom-color-brand);
+}
+
 /* Widgets */
 
 .card {

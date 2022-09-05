@@ -1,15 +1,27 @@
 import { useState } from 'react'
 import { supabase } from './supabaseClient'
-import PasswordChecklist from 'react-password-checklist';
+import {SignUp} from './AuthSignUp'
+import Modal from 'react-modal';
  
-export default function Auth() {
+export default function SignIn() {
   const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [IsShown, setIsShown] = useState(false)
+  const customModalStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      background:'black'
+    },
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault()
-
     try {
       setLoading(true)
       const { error } = await supabase.auth.signIn({ email, password })
@@ -21,11 +33,13 @@ export default function Auth() {
     }
   }
 
+  const toggleModal=event=> {
+    event.preventDefault()
+    setIsShown(current=>!current)
+  }
+
   return (
-    <div className="row flex flex-center">
-      <div className="col-6 form-widget" aria-live="polite">
-        <h1 className="header">Supabase + React</h1>
-        <p className="description">Sign in with your email below</p>
+    <div className="signInBox">
         {loading ? (
           'Loading...'
         ) : (
@@ -53,7 +67,19 @@ export default function Auth() {
             </button>
           </form>
         )}
+        <hr></hr>
+        <form onSubmit={toggleModal}>
+          <button className="button primary block" aria-live="polite">
+                Sign Up
+          </button>
+          <Modal
+          isOpen={IsShown}
+          onRequestClose={toggleModal}
+          style={customModalStyles}>
+          <button onClick={toggleModal}>X</button>
+          {IsShown&&<SignUp/>}
+          </Modal>
+        </form>
       </div>
-    </div>
   )
 }

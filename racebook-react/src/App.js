@@ -1,7 +1,8 @@
 import './index.css'
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
-import Auth from './Auth'
+import { ScreenAuth } from './ScreenAuth'
+import { ScreenHome } from './ScreenHome'
 import Account from './Account'
 
 export default function App() {
@@ -17,7 +18,7 @@ export default function App() {
 
   return (
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
-      {!session ? <Auth /> : <Account key={session.user.id} session={session} />}
+      {!session ? <ScreenAuth /> : <ScreenHome key={session.user.id} session={session} />}
     </div>
   )
 }
