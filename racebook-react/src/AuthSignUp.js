@@ -60,6 +60,8 @@ export function SignUp() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [passwordValid, setPasswordValid] = useState(false)
+  const [validButtonStyle, setValidButtonStyle] = useState("button block");
 
   const handleSignUp = async (e) => {
     e.preventDefault()
@@ -74,6 +76,20 @@ export function SignUp() {
       } finally {
         setLoading(false)
       }
+  }
+
+  const handlePasswordValidLoad=async (e)=> {
+    setValidButtonStyle("button block")
+  }
+
+  const handlePasswordValid=async (e)=> {
+    await setPasswordValid(current=>!current)
+    if(!passwordValid){
+      setValidButtonStyle("button primary block")
+    }
+    else{
+      setValidButtonStyle("button block")
+    }
   }
 
   return (
@@ -116,11 +132,12 @@ export function SignUp() {
               minLength={6}
               value={password}
               valueAgain={confirmPassword}
-              onChange={(isValid) => true}
+              onChange={(isValid) => handlePasswordValid()}
             />
-            <button className="button primary block" aria-live="polite">
+            <button className={validButtonStyle} aria-live="polite" disabled={!passwordValid}>
               Sign Up
             </button>
+            <p>{String(validButtonStyle)}</p>
           </form>
         )}
       </div>
