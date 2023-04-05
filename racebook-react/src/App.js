@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 import { ScreenAuth } from './ScreenAuth'
 import { ScreenHome } from './ScreenHome'
+
 import Account from './Account'
 
 export default function App() {

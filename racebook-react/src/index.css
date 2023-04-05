@@ -376,3 +376,35 @@ button.secondary,
   animation: spin 1s linear infinite;
   filter: invert(1);
 }
+
+.sidebar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+.component {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.homepage {
+  margin-left: 200px;
+  padding: 20px;
+}
+
+.layout {
+  background-color: #f0f0f0;
+}
+
+.layout div {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  padding: 10px;
+}
