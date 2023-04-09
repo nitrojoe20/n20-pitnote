@@ -4,9 +4,12 @@ export function Sidebar() {
   const handleSignOut = async (e) => {
     await supabase.auth.signOut();
   };
+  const handleButtonClick = (buttonId) => {
+    props.onButtonClick(buttonId);
+  };
   return (
     <div className="sidebar">
-      <button>New Race</button>
+      <button onClick={handleButtonClick}>New Race</button>
       <button>New Car</button>
       <button>Settings</button>
       <button onClick={handleSignOut}>Sign Out</button>
