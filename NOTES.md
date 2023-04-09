@@ -302,3 +302,6 @@ https://supabase.com/docs/guides/with-react
 ## Developing an understanding
 
 After taking some time to open and read through the project, there are major changes that need to be made structurally. Instead, I will choose to follow a development roadmap.
+
+## NEW DEPENDENCY AND AI TESTING
+npm install react react-dom react-grid-layout react-draggable --save

@@ -1,20 +1,14 @@
 import { useState } from "react";
-
+import { supabase } from './supabaseClient'
 export function Sidebar() {
-  const [components, setComponents] = useState([
-    { id: "1", name: "Component 1" },
-    { id: "2", name: "Component 2" },
-    { id: "3", name: "Component 3" }
-  ]);
-
+  const handleSignOut = async (e) => {
+    await supabase.auth.signOut();
+  };
   return (
     <div className="sidebar">
-      <h2>Components</h2>
-      <ul>
-        {components.map((component) => (
-          <li key={component.id}>{component.name}</li>
-        ))}
-      </ul>
+      <button>New Race</button>
+      <button onClick={handleSignOut}>Sign Out</button>
+      <p>Logged in as:<br></br>{supabase.auth.user().email}</p>
     </div>
   );
 }

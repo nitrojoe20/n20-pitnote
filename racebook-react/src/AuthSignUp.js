@@ -137,7 +137,6 @@ export function SignUp() {
             <button className={validButtonStyle} aria-live="polite" disabled={!passwordValid}>
               Sign Up
             </button>
-            <p>{String(validButtonStyle)}</p>
           </form>
         )}
       </div>

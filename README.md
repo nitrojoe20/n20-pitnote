@@ -13,5 +13,5 @@ The primary objective of this web app is to learn about React JS, Firebase (or s
 ## Dependencies
 
 - React JS
-- Firebase
+- Supabase
 - More details will follow
