@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { supabase } from './supabaseClient'
-export function Sidebar() {
+export function Sidebar(props) {
   const handleSignOut = async (e) => {
     await supabase.auth.signOut();
   };
@@ -9,9 +9,9 @@ export function Sidebar() {
   };
   return (
     <div className="sidebar">
-      <button onClick={handleButtonClick}>New Race</button>
-      <button>New Car</button>
-      <button>Settings</button>
+      <button onClick={() => handleButtonClick('dashboard')}>Dashboard</button>
+      <button onClick={() => handleButtonClick('settings')}>Settings</button>
+      <button onClick={() => handleButtonClick('profile')}>Profile</button>
       <button onClick={handleSignOut}>Sign Out</button>
       <p>Logged in as:<br></br>{supabase.auth.user().email}</p>
     </div>
