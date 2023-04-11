@@ -9,10 +9,10 @@ export function Sidebar(props) {
   };
   return (
     <div className="sidebar">
-      <button onClick={() => handleButtonClick('dashboard')}>Dashboard</button>
-      <button onClick={() => handleButtonClick('settings')}>Settings</button>
-      <button onClick={() => handleButtonClick('profile')}>Profile</button>
-      <button onClick={handleSignOut}>Sign Out</button>
+      <button class="button primary block" onClick={() => handleButtonClick('dashboard')}>Dashboard</button>
+      <button class="button primary block" onClick={() => handleButtonClick('settings')}>Settings</button>
+      <button class="button primary block" onClick={() => handleButtonClick('profile')}>Profile</button>
+      <button class="button block" onClick={handleSignOut}>Sign Out</button>
       <p>Logged in as:<br></br>{supabase.auth.user().email}</p>
     </div>
   );

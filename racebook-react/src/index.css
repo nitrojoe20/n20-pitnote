@@ -6,7 +6,7 @@ body {
   --custom-panel-color: #222;
   --custom-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.8);
   --custom-color: #fff;
-  --custom-color-brand: #24b47e;
+  --custom-color-brand: #00c3ff;
   --custom-color-secondary: #666;
   --custom-border: 1px solid #333;
   --custom-border-radius: 5px;
@@ -257,6 +257,11 @@ button.primary,
   border: 1px solid var(--custom-color-brand);
 }
 
+button.primary:hover, .button.primary:hover{
+  background-color: #2a2a2a;
+}
+
+
 button.secondary,
 .button.secondary {
   background-color: var(--custom-color-brand);
@@ -398,6 +403,7 @@ button.secondary,
   justify-content: center;
 }
 
+
 .sidebar button {
   margin-bottom: 10px;
   padding: 10px 20px;
@@ -405,16 +411,15 @@ button.secondary,
   border-radius: 5px;
   font-size: 16px;
   font-weight: 500;
-  color: #fff;
-  background-color: #4CAF50;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
   width:80%
 }
 
 .sidebar button:hover {
-  background-color: #3e8e41;
+  background-color: #2a2a2a;
 }
+
 
 .sidebar p{
   color:#101010;
@@ -436,4 +441,10 @@ button.secondary,
 .wrapper{
   width:100%;
   height: 100%;
+}
+.signInBox{
+  width:400px;
+}
+.invalid{
+  border-color:red;
 }

@@ -1,59 +1,8 @@
 import { useState } from 'react'
 import { supabase } from './supabaseClient'
 import PasswordChecklist from 'react-password-checklist';
- 
-
-// class Form extends Component{
-//   constructor (signUpProps){
-//     super(signUpProps);
-//     this.state = {
-//       email:'',
-//       password:'',
-//       formErrors: {email:'', password:''},
-//       emailValid: false,
-//       passwordValid: false,
-//       formValid:false
-//     }
-//   }
-//     handleUserInput = (e) => {
-//     const name = e.target.name;
-//     const value = e.target.value;
-//     this.setState({[name]: value},
-//                   () => { this.validateField(name, value) });
-//   }
-
-//   validateField(fieldName, value) {
-//     let fieldValidationErrors = this.state.formErrors;
-//     let emailValid = this.state.emailValid;
-//     let passwordValid = this.state.passwordValid;
-
-//     switch(fieldName) {
-//       case 'email':
-//         emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-//         fieldValidationErrors.email = emailValid ? '' : ' is invalid';
-//         break;
-//       case 'password':
-//         passwordValid = value.length >= 6;
-//         fieldValidationErrors.password = passwordValid ? '': ' is too short';
-//         break;
-//       default:
-//         break;
-//     }
-//     this.setState({formErrors: fieldValidationErrors,
-//                     emailValid: emailValid,
-//                     passwordValid: passwordValid
-//                   }, this.validateForm);
-//   }
-
-//   validateForm() {
-//     this.setState({formValid: this.state.emailValid && this.state.passwordValid});
-//   }
-
-//   errorClass(error) {
-//     return(error.length === 0 ? '' : 'has-error');
-//   }
-// }
-
+import { useEffect } from 'react';
+import { validate } from 'react-email-validator';
 
 export function SignUp() {
   const [loading, setLoading] = useState(false)
@@ -61,84 +10,103 @@ export function SignUp() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [passwordValid, setPasswordValid] = useState(false)
-  const [validButtonStyle, setValidButtonStyle] = useState("button block");
+  const [emailValid, setEmailValid] = useState(false)
+  const [validButtonStyle, setValidButtonStyle] = useState("button")
 
   const handleSignUp = async (e) => {
     e.preventDefault()
-    //validation
-      try {
-        setLoading(true)
-        const { error } = await supabase.auth.signUp({ email, password })
-        if (error) throw error
-        alert('Check your email for the login link!')
-      } catch (error) {
-        alert(error.error_description || error.message)
-      } finally {
-        setLoading(false)
-      }
-  }
-
-  const handlePasswordValidLoad=async (e)=> {
-    setValidButtonStyle("button block")
-  }
-
-  const handlePasswordValid=async (e)=> {
-    await setPasswordValid(current=>!current)
-    if(!passwordValid){
-      setValidButtonStyle("button primary block")
+    // validation
+    try {
+      setLoading(true)
+      const { error } = await supabase.auth.signUp({ email, password })
+      if (error) throw error
+      alert('Check your email for the login link!')
+    } catch (error) {
+      alert(error.error_description || error.message)
+    } finally {
+      setLoading(false)
     }
-    else{
+  }
+
+  const handleEmailValidation = (e) => {
+    setEmail(e.target.value)
+    setEmailValid(validateEmail(e.target.value))
+  }
+
+  const validateEmail = (email) => {
+    return validate(email)
+  }
+
+  const handlePasswordValid = (isValid) => {
+    setPasswordValid(isValid)
+  }
+
+  useEffect(() => {
+    if (emailValid && passwordValid) {
+      setValidButtonStyle("button block primary")
+    } else {
       setValidButtonStyle("button block")
     }
-  }
+  }, [emailValid, passwordValid])
 
   return (
     <div className="signInBox">
-        <h1 className="header">Sign Up</h1>
-        <p className="description">Sign up with your email below</p>
-        
-        {loading ? (
-          'Submitting User...'
-        ) : (
-          <form onSubmit={handleSignUp}>
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              className="inputField"
-              type="email"
-              placeholder="Your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              className="inputField"
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input
-              id="password"
-              className="inputField"
-              type="password"
-              placeholder="Confirm Password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            <PasswordChecklist
-              rules={["minLength","specialChar","number","capital","match"]}
-              minLength={6}
-              value={password}
-              valueAgain={confirmPassword}
-              onChange={(isValid) => handlePasswordValid()}
-            />
-            <button className={validButtonStyle} aria-live="polite" disabled={!passwordValid}>
-              Sign Up
-            </button>
-          </form>
-        )}
-      </div>
+      <h1 className="header">Sign Up</h1>
+      <p className="description">Sign up with your email below</p>
+
+      {loading ? (
+        'Submitting User...'
+      ) : (
+        <form onSubmit={handleSignUp}>
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            className={`inputField ${emailValid ? '' : 'invalid'}`}
+            type="email"
+            placeholder="Your email"
+            value={email}
+            onChange={handleEmailValidation}
+          />
+
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            className={`inputField ${passwordValid ? '' : 'invalid'}`}
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            id="password"
+            className={`inputField ${passwordValid ? '' : 'invalid'}`}
+            type="password"
+            placeholder="Confirm Password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+
+          <br></br> <br></br>
+          <PasswordChecklist
+            rules={["minLength", "specialChar", "number", "capital", "match"]}
+            minLength={6}
+            value={password}
+            valueAgain={confirmPassword}
+            onChange={handlePasswordValid}
+          />
+          <br></br>
+          <button
+            className={validButtonStyle}
+            aria-live="polite"
+            disabled={!emailValid || !passwordValid}
+          >
+            Sign Up
+          </button>
+          {!emailValid && email.length > 0 && (
+            <p className="error">Invalid email format</p>
+          )}
+        </form>
+      )}
+    </div>
   )
 }
