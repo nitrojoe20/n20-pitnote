@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
-import Dashboard from './Dashboard';
+import Dashboard from './Content/Dashboard';
+import Profile from './Content/Profile';
+import Settings from './Content/Settings';
 
 export function CurrentContent(props) {
   let content;
@@ -9,10 +11,10 @@ export function CurrentContent(props) {
       content = <Dashboard/>;
       break;
     case 'settings':
-      content = "";
+      content = <Settings/>;
       break;
     case 'profile':
-      content = "";
+      content = <Profile/>;
       break;
     default:
       content = null;
