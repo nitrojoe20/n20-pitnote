@@ -8,7 +8,7 @@ My hope is that this project can assist me in making and remembering setup chang
 
 ## Goal
 
-The primary objective of this web app is to learn about React JS, Firebase (or some alternative), all while developing a useful tool to aid others.
+The primary objective of this web app is to learn about React JS, Firebase (or some alternative), all while developing a useful tool to aid others. 
 
 ## Dependencies
 
