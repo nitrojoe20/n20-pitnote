@@ -25,7 +25,7 @@ function CreateCarForm() {
 
       // Log the data to be sent
       console.log('Car Data:', carData);
-      console.log('Auth Token:', supabase.auth.session()?.access_token);
+      console.log('Auth Token:', supabase.auth.session());
 
       try {
         const { data, error } = await supabase

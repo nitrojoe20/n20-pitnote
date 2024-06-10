@@ -2,11 +2,11 @@ import Dashboard from './Content/Dashboard';
 import Profile from './Content/Profile';
 import Settings from './Content/Settings';
 
-export function CurrentContent(props) {
+export function CurrentContent({ contentId, session }) {
   let content;
-  switch (props.contentId) {
+  switch (contentId) {
     case 'dashboard':
-      content = <Dashboard />;
+      content = <Dashboard session={session} />;
       break;
     case 'settings':
       content = <Settings />;
