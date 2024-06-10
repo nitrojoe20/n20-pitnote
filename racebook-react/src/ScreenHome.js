@@ -4,7 +4,7 @@ import GridLayout from "react-grid-layout"
 import { Sidebar } from './Sidebar'
 import { CurrentContent } from './CurrentContent'
 
-export function ScreenHome() {
+export default function ScreenHome() {
   const [currentContent, setCurrentContent] = useState('dashboard');
   const handleSidebarButtonClick = (buttonId) => {
     setCurrentContent(buttonId);

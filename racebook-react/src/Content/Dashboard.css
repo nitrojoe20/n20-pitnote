@@ -1,0 +1,29 @@
+.grid-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .drag-handle {
+    width: 20px;
+    color:black;
+    cursor: grab;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    margin-top: 10px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
+  
+  .drag-handle:hover {
+    color:gray;
+  }
+  

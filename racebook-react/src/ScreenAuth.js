@@ -2,7 +2,7 @@ import SignIn from './AuthSignIn'
 import { SignUp } from './AuthSignUp'
 
 
-export function ScreenAuth() {
+export default function ScreenAuth() {
 
 return(
     <div className="center">
