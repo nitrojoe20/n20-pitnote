@@ -1,0 +1,19 @@
+.track-mode {
+    padding: 20px;
+  }
+  
+  .track-mode form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .track-mode label {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .track-mode button {
+    align-self: flex-start;
+  }
+  

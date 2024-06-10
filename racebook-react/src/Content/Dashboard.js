@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { WidthProvider, Responsive } from 'react-grid-layout';
 import { supabase } from '../supabaseClient';
-import RecordPartValuesForm from './RecordPartValuesForm';
 import './Dashboard.css';
+import RecordPartValuesForm from './RecordPartValuesForm';
+import TrackMode from './TrackMode';
+
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -13,6 +15,7 @@ const Dashboard = ({ session }) => {
   const [selectedCarId, setSelectedCarId] = useState(null);
   const [parts, setParts] = useState([]);
   const [items, setItems] = useState([]);
+  const [activeTab, setActiveTab] = useState('shop');
 
   useEffect(() => {
     fetchCars();
@@ -124,8 +127,8 @@ const Dashboard = ({ session }) => {
     if (selectedCarId) {
       initialItems.push({
         i: 'b',
-        x: 1,
-        y: 0,
+        x: 0,
+        y: 5,
         w: 1,
         h: 15,
         static: false,
@@ -153,14 +156,14 @@ const Dashboard = ({ session }) => {
 
       initialItems.push({
         i: 'c',
-        x: 2,
-        y: 0,
+        x: 3,
+        y: 1,
         w: 2,
-        h: 20,
+        h: 15,
         static: false,
         content: (
           <div>
-            <RecordPartValuesForm carId={selectedCarId} />
+            <RecordPartValuesForm carId={selectedCarId} session={session} />
             <div className="drag-handle">:::</div>
           </div>
         ),
@@ -173,22 +176,33 @@ const Dashboard = ({ session }) => {
   return (
     <div>
       <h1>Dashboard</h1>
-      <ResponsiveGridLayout
-        className="layout"
-        onLayoutChange={() => {}}
-        onBreakpointChange={() => {}}
-        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 3, md: 2, sm: 1, xs: 1, xxs: 1 }}
-        autoSize={true}
-        rowHeight={30}
-        draggableHandle=".drag-handle"
-      >
-        {items.map((item) => (
-          <div key={item.i} data-grid={item}>
-            {item.content}
-          </div>
-        ))}
-      </ResponsiveGridLayout>
+      <div className="tabs">
+        <button className={`tab ${activeTab === 'shop' ? 'active' : ''}`} onClick={() => setActiveTab('shop')}>
+          Shop Mode
+        </button>
+        <button className={`tab ${activeTab === 'track' ? 'active' : ''}`} onClick={() => setActiveTab('track')}>
+          Track Mode
+        </button>
+      </div>
+      {activeTab === 'shop' && (
+        <ResponsiveGridLayout
+          className="layout"
+          onLayoutChange={() => {}}
+          onBreakpointChange={() => {}}
+          breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+          cols={{ lg: 3, md: 2, sm: 1, xs: 1, xxs: 1 }}
+          autoSize={true}
+          rowHeight={30}
+          draggableHandle=".drag-handle"
+        >
+          {items.map((item) => (
+            <div key={item.i} data-grid={item}>
+              {item.content}
+            </div>
+          ))}
+        </ResponsiveGridLayout>
+      )}
+      {activeTab === 'track' && <TrackMode session={session} />}
     </div>
   );
 };

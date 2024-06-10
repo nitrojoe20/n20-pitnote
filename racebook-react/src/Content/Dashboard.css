@@ -1,6 +1,5 @@
 .react-grid-item {
     position: relative;
-    display: flex;
     flex-direction: column;
     padding: 10px;
     background-color: #fff;
@@ -58,6 +57,16 @@
     cursor: pointer;
   }
   
+select{
+  color:black;
+  margin-bottom:10px;
+}
+select option{
+  color:black;
+  margin-bottom:10px;
+}
+
+
   .button.primary.block:hover {
     background-color: #0056b3;
   }

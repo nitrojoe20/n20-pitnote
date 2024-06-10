@@ -11,8 +11,10 @@ export default function ScreenHome({ session }) {
 
   return (
     <>
+    <div className="homecontainer">
       <Sidebar onButtonClick={handleSidebarButtonClick} />
       <CurrentContent contentId={currentContent} session={session} />
+    </div>
     </>
   );
 }

@@ -29,7 +29,7 @@ body,
 #__next {
   height: 100vh;
   width: 100vw;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 /* Grid */
@@ -389,19 +389,7 @@ button.secondary,
   margin-bottom: 10px;
 }
 
-.sidebar {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 200px;
-  padding: 20px;
-  background-color: #f0f0f0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+
 
 
 .sidebar button {
@@ -425,9 +413,31 @@ button.secondary,
   color:#101010;
 }
 
-.homecontent{
-  margin-left:200px;
-  padding:20px;
+
+.homecontainer {
+  display: flex;
+  height: 100%;
+}
+
+.sidebar {
+  position: sticky;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+  padding: 20px;
+  height:100vh;
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.homecontent {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
 }
 .center {
   margin: 0;
